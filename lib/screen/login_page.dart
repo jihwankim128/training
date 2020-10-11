@@ -15,6 +15,9 @@ class LoginPage extends StatelessWidget {
     final Size size = MediaQuery.of(context).size;
 
     return Scaffold(
+      appBar: AppBar(
+        title: Text('회원 가입'),
+      ),
       body: Stack(
         alignment: Alignment.center,
         children: <Widget>[
