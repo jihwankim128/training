@@ -26,37 +26,7 @@ class LoginPage extends StatelessWidget {
               ),
               Stack(
                 children: <Widget>[
-                  Card(
-                    elevation: 6,
-                    child: Form(
-                        key: formKey,
-                        child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: <Widget>[
-                            TextFormField(
-                              controller: idController,
-                              decoration: InputDecoration(
-                                  icon: Icon(Icons.account_circle),
-                                  labelText: "아이디"),
-                              validator: (value) =>
-                                  value.isEmpty ? '아이디를 입력하세요.' : null,
-                            ),
-                            TextFormField(
-                              controller: pwController,
-                              decoration: InputDecoration(
-                                  icon: Icon(Icons.vpn_key), labelText: "패스워드"),
-                              validator: (value) =>
-                                  value.isEmpty ? '패스워드를 입력하세요.' : null,
-                            ),
-                            Text("비밀번호를 잃어 버리셨습니까?"),
-                          ],
-                        )),
-                  )
-                  // Container(
-                  //   width: 100,
-                  //   height: 50,
-                  //   color: Colors.black,
-                  // )
+                  loginForm(size),
                 ],
               ),
               Container(
@@ -71,5 +41,41 @@ class LoginPage extends StatelessWidget {
         ],
       ),
     );
+  }
+
+  Widget loginForm(Size size) {
+    return Padding(
+        padding: EdgeInsets.all(size.width * 0.05),
+        child: Card(
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(16),
+          ),
+          elevation: 6,
+          child: Padding(
+              padding: const EdgeInsets.only(
+                  left: 12, right: 12, top: 12, bottom: 32),
+              child: Form(
+                  key: formKey,
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: <Widget>[
+                      TextFormField(
+                        controller: idController,
+                        decoration: InputDecoration(
+                            icon: Icon(Icons.account_circle), labelText: "아이디"),
+                        validator: (value) =>
+                            value.isEmpty ? '아이디를 입력하세요.' : null,
+                      ),
+                      TextFormField(
+                        controller: pwController,
+                        decoration: InputDecoration(
+                            icon: Icon(Icons.vpn_key), labelText: "패스워드"),
+                        validator: (value) =>
+                            value.isEmpty ? '패스워드를 입력하세요.' : null,
+                      ),
+                      Text("비밀번호를 잃어 버리셨습니까?"),
+                    ],
+                  ))),
+        ));
   }
 }
