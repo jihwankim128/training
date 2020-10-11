@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:sample/data/join_page.dart';
 
 class LoginPage extends StatelessWidget {
   final GlobalKey<FormState> formKey = GlobalKey<FormState>();
@@ -34,7 +35,13 @@ class LoginPage extends StatelessWidget {
               Container(
                 height: size.height * 0.1,
               ),
-              Text("계정이 없으신가요? Create Account"),
+              GestureDetector(
+                onTap: () {
+                  Navigator.push(context,
+                      MaterialPageRoute(builder: (context) => JoinPage()));
+                },
+                child: Text("계정이 없으신가요? Create Account"),
+              ),
               Container(
                 height: size.height * 0.05,
               ),
