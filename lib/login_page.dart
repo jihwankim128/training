@@ -4,6 +4,11 @@ class LoginPage extends StatelessWidget {
   final GlobalKey<FormState> formKey = GlobalKey<FormState>();
   final TextEditingController idController = TextEditingController();
   final TextEditingController pwController = TextEditingController();
+
+  void _validate() {
+    if (formKey.currentState.validate()) print("succes");
+  }
+
   @override
   Widget build(BuildContext context) {
     final Size size = MediaQuery.of(context).size;
@@ -46,10 +51,13 @@ class LoginPage extends StatelessWidget {
       right: size.width * 0.15,
       bottom: 0,
       child: RaisedButton(
-        child: Text('로그인'),
+        child: Text(
+          '로그인',
+          style: TextStyle(fontSize: 22, color: Colors.white),
+        ),
         color: Colors.lightBlue,
-        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(15)),
-        onPressed: () {},
+        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(25)),
+        onPressed: _validate,
       ),
     );
   }
@@ -63,7 +71,8 @@ class LoginPage extends StatelessWidget {
           ),
           elevation: 6,
           child: Padding(
-              padding: const EdgeInsets.only(left: 12, right: 12, top: 12, bottom: 32),
+              padding: const EdgeInsets.only(
+                  left: 12, right: 12, top: 12, bottom: 32),
               child: Form(
                   key: formKey,
                   child: Column(
@@ -84,7 +93,7 @@ class LoginPage extends StatelessWidget {
                             value.isEmpty ? '패스워드를 입력하세요.' : null,
                       ),
                       Text(""),
-                      Text("비밀번호를 잃어 버리셨습니까?"),
+                      Text("비밀번호가 기억나지 않습니까?"),
                     ],
                   ))),
         ));
