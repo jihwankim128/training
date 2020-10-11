@@ -19,14 +19,11 @@ class LoginPage extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.center,
             mainAxisAlignment: MainAxisAlignment.end,
             children: <Widget>[
-              Container(
-                width: 200,
-                height: 200,
-                color: Colors.blue,
-              ),
+              //container
               Stack(
                 children: <Widget>[
                   loginForm(size),
+                  loginButton(size),
                 ],
               ),
               Container(
@@ -43,6 +40,20 @@ class LoginPage extends StatelessWidget {
     );
   }
 
+  Widget loginButton(Size size) {
+    return Positioned(
+      left: size.width * 0.15,
+      right: size.width * 0.15,
+      bottom: 0,
+      child: RaisedButton(
+        child: Text('로그인'),
+        color: Colors.lightBlue,
+        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(15)),
+        onPressed: () {},
+      ),
+    );
+  }
+
   Widget loginForm(Size size) {
     return Padding(
         padding: EdgeInsets.all(size.width * 0.05),
@@ -52,8 +63,7 @@ class LoginPage extends StatelessWidget {
           ),
           elevation: 6,
           child: Padding(
-              padding: const EdgeInsets.only(
-                  left: 12, right: 12, top: 12, bottom: 32),
+              padding: const EdgeInsets.only(left: 12, right: 12, top: 12, bottom: 32),
               child: Form(
                   key: formKey,
                   child: Column(
@@ -73,6 +83,7 @@ class LoginPage extends StatelessWidget {
                         validator: (value) =>
                             value.isEmpty ? '패스워드를 입력하세요.' : null,
                       ),
+                      Text(""),
                       Text("비밀번호를 잃어 버리셨습니까?"),
                     ],
                   ))),
