@@ -1,62 +1,74 @@
 import 'package:flutter/material.dart';
- 
-class LoginPage extends StatefulWidget {
-  @override
-  _LoginPageState createState() => _LoginPageState();
-}
- 
-class _LoginPageState extends State<LoginPage> {
-  final formKey = new GlobalKey<FormState>();
- 
-  String _email;
-  String _password;
- 
-  void validateAndSave() {
-    final form = formKey.currentState;
-    if (form.validate()) {
-      form.save();
-      print('Form is valid Email: $_email, password: $_password');
-    } else {
-      print('Form is invalid Email: $_email, password: $_password');
-    }
-  }
- 
+
+class LoginPage extends StatelessWidget {
+  final GlobalKey<FormState> formKey = GlobalKey<FormState>();
+  final TextEditingController idController = TextEditingController();
+  final TextEditingController pwController = TextEditingController();
   @override
   Widget build(BuildContext context) {
-    return new Scaffold(
-      appBar: new AppBar(
-        title: new Text('login'),
-      ),
-      body: new Container(
-        padding: EdgeInsets.all(16),
-        child: new Form(
-          key: formKey,
-          child: new Column(
-            crossAxisAlignment: CrossAxisAlignment.stretch,
+    final Size size = MediaQuery.of(context).size;
+
+    return Scaffold(
+      body: Stack(
+        alignment: Alignment.center,
+        children: <Widget>[
+          Container(
+            color: Colors.white,
+          ),
+          Column(
+            crossAxisAlignment: CrossAxisAlignment.center,
+            mainAxisAlignment: MainAxisAlignment.end,
             children: <Widget>[
-              new TextFormField(
-                decoration: new InputDecoration(labelText: 'Email'),
-                validator: (value) =>
-                value.isEmpty ? 'Email can\'t be empty' : null,
-                onSaved: (value) => _email = value,
+              Container(
+                width: 200,
+                height: 200,
+                color: Colors.blue,
               ),
-              new TextFormField(
-                obscureText: true,
-                decoration: new InputDecoration(labelText: 'Password'),
-                validator: (value) =>
-                value.isEmpty ? 'Password can\'t be empty' : null,
-                onSaved: (value) => _password = value,
+              Stack(
+                children: <Widget>[
+                  Card(
+                    elevation: 6,
+                    child: Form(
+                        key: formKey,
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: <Widget>[
+                            TextFormField(
+                              controller: idController,
+                              decoration: InputDecoration(
+                                  icon: Icon(Icons.account_circle),
+                                  labelText: "아이디"),
+                              validator: (value) =>
+                                  value.isEmpty ? '아이디를 입력하세요.' : null,
+                            ),
+                            TextFormField(
+                              controller: pwController,
+                              decoration: InputDecoration(
+                                  icon: Icon(Icons.vpn_key), labelText: "패스워드"),
+                              validator: (value) =>
+                                  value.isEmpty ? '패스워드를 입력하세요.' : null,
+                            ),
+                            Text("비밀번호를 잃어 버리셨습니까?"),
+                          ],
+                        )),
+                  )
+                  // Container(
+                  //   width: 100,
+                  //   height: 50,
+                  //   color: Colors.black,
+                  // )
+                ],
               ),
-              new RaisedButton(
-                child: new Text(
-                  'Login',
-                  style: new TextStyle(fontSize: 20.0),
-                ),
-                onPressed: validateAndSave,
+              Container(
+                height: size.height * 0.1,
+              ),
+              Text("계정이 없으신가요? 계정 만들기"),
+              Container(
+                height: size.height * 0.05,
               ),
             ],
           ),
-        ),
+        ],
       ),
     );
   }
